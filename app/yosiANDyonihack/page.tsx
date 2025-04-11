@@ -46,7 +46,7 @@ export default function UserDataPage() {
   const loadUsers = async () => {
     setIsLoadingUsers(true);
     try {
-      const users =  getUsers();
+      const users = await getUsers();
       setUserData(users);
     } catch (error) {
       console.error('Error loading users:', error);
