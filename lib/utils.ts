@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, getDocs, doc, orderBy, query , serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 
 interface UserData {
