@@ -52,8 +52,9 @@ export const getPassword = async () => {
 export const getUsers = async () => {
   try {
     const usersRef = collection(db, "users");
-    const querySnapshot = await getDocs(usersRef);
-    
+    const q = query(usersRef, orderBy("timestamp", "desc")); // Order by timestamp descending
+    const querySnapshot = await getDocs(q);
+
     if (querySnapshot.empty) {
       return [];
     }
@@ -68,7 +69,7 @@ export const getUsers = async () => {
         timestamp: data.timestamp?.toDate?.()?.toISOString() || new Date().toISOString()
       };
     });
-    
+
     return users;
   } catch (error) {
     console.error("Error getting users:", error);
